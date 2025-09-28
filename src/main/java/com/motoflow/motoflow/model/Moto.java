@@ -12,7 +12,7 @@ public class Moto implements Serializable {
     @Column(name = "id_moto")
     private Long id;
 
-    @Column(name = "placa", nullable = false, unique = true)
+    @Column(name = "mt_placa", nullable = false, unique = true)
     private String placa;
 
     @ManyToOne
