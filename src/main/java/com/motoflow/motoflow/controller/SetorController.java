@@ -1,7 +1,7 @@
-package controller;
+package com.motoflow.motoflow.controller;
 
-import model.Setor;
-import service.SetorService;
+import com.motoflow.motoflow.model.Setor;
+import com.motoflow.motoflow.service.SetorService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

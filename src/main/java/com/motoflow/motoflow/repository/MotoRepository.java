@@ -1,6 +1,6 @@
-package repository;
+package com.motoflow.motoflow.repository;
 
-import model.Moto;
+import com.motoflow.motoflow.model.Moto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,17 +1,18 @@
-package model;
+package com.motoflow.motoflow.model;
+
 
 import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "modelo")
-public class Modelo implements Serializable {
+@Table(name = "setor")
+public class Setor implements Serializable {
 
     @Id
-    @Column(name = "id_modelo")
+    @Column(name = "id_setor")
     private Long id;
 
-    @Column(name = "nm_modelo", nullable = false)
+    @Column(name = "nm_setor", nullable = false)
     private String nome;
 
     // Getters e Setters

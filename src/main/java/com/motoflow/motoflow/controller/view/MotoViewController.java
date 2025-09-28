@@ -1,9 +1,8 @@
-package controller.view;
+package com.motoflow.motoflow.controller.view;
 
-import model.Moto;
-import model.Modelo;
-import service.MotoService;
-import service.ModeloService;
+import com.motoflow.motoflow.model.Moto;
+import com.motoflow.motoflow.service.MotoService;
+import com.motoflow.motoflow.service.ModeloService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

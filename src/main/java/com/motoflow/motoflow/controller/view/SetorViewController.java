@@ -1,7 +1,7 @@
-package controller.view;
+package com.motoflow.motoflow.controller.view;
 
-import model.Setor;
-import service.SetorService;
+import com.motoflow.motoflow.model.Setor;
+import com.motoflow.motoflow.service.SetorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

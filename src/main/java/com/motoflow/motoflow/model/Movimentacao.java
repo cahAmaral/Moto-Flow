@@ -1,4 +1,4 @@
-package model;
+package com.motoflow.motoflow.model;
 
 import jakarta.persistence.*;
 import java.io.Serializable;

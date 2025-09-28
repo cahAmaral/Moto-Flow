@@ -1,7 +1,7 @@
-package service;
+package com.motoflow.motoflow.service;
 
-import model.Operador;
-import repository.OperadorRepository;
+import com.motoflow.motoflow.model.Operador;
+import com.motoflow.motoflow.repository.OperadorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
