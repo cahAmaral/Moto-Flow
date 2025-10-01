@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/motos")
 public class MotoViewController {
@@ -21,41 +19,34 @@ public class MotoViewController {
         this.modeloService = modeloService;
     }
 
-
     @GetMapping
-    public String list(Model model) {
-        List<Moto> motos = motoService.findAll();
-        model.addAttribute("motos", motos);
-        return "moto/list"; // templates/moto/list.html
+    public String listarMotos(Model model) {
+        model.addAttribute("motos", motoService.findAll());
+        return "moto/moto-list";
     }
-
 
     @GetMapping("/new")
-    public String createForm(Model model) {
+    public String novaMotoForm(Model model) {
         model.addAttribute("moto", new Moto());
         model.addAttribute("modelos", modeloService.findAll());
-        return "moto/form"; // templates/moto/form.html
+        return "moto/moto-form";
     }
 
-
-    @GetMapping("/edit/{id}")
-    public String editForm(@PathVariable Long id, Model model) {
-        Moto moto = motoService.findById(id).orElseThrow(() -> new RuntimeException("Moto não encontrada"));
-        model.addAttribute("moto", moto);
-        model.addAttribute("modelos", modeloService.findAll());
-        return "moto/form";
-    }
-
-
-    @PostMapping("/save")
-    public String save(@ModelAttribute Moto moto) {
+    @PostMapping
+    public String salvarMoto(@ModelAttribute Moto moto) {
         motoService.save(moto);
         return "redirect:/motos";
     }
 
+    @GetMapping("/edit/{id}")
+    public String editarMoto(@PathVariable Long id, Model model) {
+        model.addAttribute("moto", motoService.findById(id));
+        model.addAttribute("modelos", modeloService.findAll());
+        return "moto/moto-form";
+    }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Long id) {
+    public String deletarMoto(@PathVariable Long id) {
         motoService.delete(id);
         return "redirect:/motos";
     }

@@ -1,7 +1,9 @@
 package com.motoflow.motoflow.controller.view;
 
 import com.motoflow.motoflow.model.Movimentacao;
+import com.motoflow.motoflow.model.Moto;
 import com.motoflow.motoflow.service.MovimentacaoService;
+import com.motoflow.motoflow.service.MotoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +13,11 @@ import org.springframework.web.bind.annotation.*;
 public class MovimentacaoViewController {
 
     private final MovimentacaoService movimentacaoService;
+    private final MotoService motoService;
 
-    public MovimentacaoViewController(MovimentacaoService movimentacaoService) {
+    public MovimentacaoViewController(MovimentacaoService movimentacaoService, MotoService motoService) {
         this.movimentacaoService = movimentacaoService;
+        this.motoService = motoService;
     }
 
     @GetMapping
@@ -25,6 +29,7 @@ public class MovimentacaoViewController {
     @GetMapping("/new")
     public String novaMovimentacaoForm(Model model) {
         model.addAttribute("movimentacao", new Movimentacao());
+        model.addAttribute("motos", motoService.findAll());
         return "movimentacao/movimentacao-form";
     }
 
@@ -37,6 +42,7 @@ public class MovimentacaoViewController {
     @GetMapping("/edit/{id}")
     public String editarMovimentacao(@PathVariable Long id, Model model) {
         model.addAttribute("movimentacao", movimentacaoService.findById(id));
+        model.addAttribute("motos", motoService.findAll());
         return "movimentacao/movimentacao-form";
     }
 

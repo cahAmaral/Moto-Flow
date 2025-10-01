@@ -2,10 +2,10 @@ package com.motoflow.motoflow.controller;
 
 import com.motoflow.motoflow.model.Moto;
 import com.motoflow.motoflow.service.MotoService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/motos")
@@ -18,38 +18,22 @@ public class MotoController {
     }
 
     @GetMapping
-    public List<Moto> getAll() {
+    public List<Moto> findAll() {
         return motoService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Moto> getById(@PathVariable Long id) {
-        return motoService.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Optional<Moto> findById(@PathVariable Long id) {
+        return motoService.findById(id);
     }
 
     @PostMapping
-    public Moto create(@RequestBody Moto moto) {
+    public Moto save(@RequestBody Moto moto) {
         return motoService.save(moto);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Moto> update(@PathVariable Long id, @RequestBody Moto moto) {
-        return motoService.findById(id)
-                .map(existing -> {
-                    moto.setId(id);
-                    return ResponseEntity.ok(motoService.save(moto));
-                })
-                .orElse(ResponseEntity.notFound().build());
-    }
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        if (motoService.findById(id).isPresent()) {
-            motoService.delete(id);
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+    public void delete(@PathVariable Long id) {
+        motoService.delete(id);
     }
 }

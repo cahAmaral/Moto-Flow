@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Lista de Movimentações</title>
 </head>
 <body>
+<h1>Lista de Movimentações</h1>
+
+<a th:href="@{/movimentacoes/new}">Nova Movimentação</a>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Placa</th>
+        <th>Data</th>
+        <th>Moto</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="mov : ${movimentacoes}">
+        <td th:text="${mov.id}"></td>
+        <td th:text="${mov.placa}"></td>
+        <td th:text="${#dates.format(mov.data,'dd/MM/yyyy HH:mm')}"></td>
+        <td th:text="${mov.moto != null ? mov.moto.placa : ''}"></td>
+        <td>
+            <a th:href="@{/movimentacoes/edit/{id}(id=${mov.id})}">Editar</a>
+            <a th:href="@{/movimentacoes/delete/{id}(id=${mov.id})}">Deletar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/}">Voltar</a>
 
 </body>
 </html>
