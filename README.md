@@ -68,7 +68,7 @@ Passos
 
 Clone o repositório:
 
-git clone https://github.com/cahAmaral/Moto-Flow
+git clone https://github.com/cahAmaral/Moto-Flow.git
 
 
 Configure o application.properties com as credenciais do banco Oracle:
