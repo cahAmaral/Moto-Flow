@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: bodyStart">
+<div class="container mt-4">
+    <h2>Lista de Operadores</h2>
+    <a th:href="@{/operadores/new}" class="btn btn-neon mb-3">Novo Operador</a>
+
+    <table class="table table-dark table-bordered align-middle">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="operador : ${operadores}">
+            <td th:text="${operador.id}"></td>
+            <td th:text="${operador.nome}"></td>
+            <td th:text="${operador.cpf}"></td>
+            <td>
+                <a th:href="@{'/operadores/edit/' + ${operador.id}}" class="btn btn-sm btn-neon">Editar</a>
+                <a th:href="@{'/operadores/delete/' + ${operador.id}}" class="btn btn-sm btn-danger">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</html>

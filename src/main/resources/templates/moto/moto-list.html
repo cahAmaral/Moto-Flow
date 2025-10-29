@@ -1,37 +1,32 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>Lista de Motos</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: bodyStart">
 <body>
-<h1>Lista de Motos</h1>
+<div>
+    <h1 class="mb-4">Motos Cadastradas</h1>
 
-<a th:href="@{/motos/new}">Nova Moto</a>
+    <a th:href="@{/motos/novo}" class="btn btn-neon mb-3">+ Nova Moto</a>
 
-<table border="1">
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Placa</th>
-    <th>Modelo</th>
-    <th>Ações</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="m : ${motos}">
-    <td th:text="${m.id}"></td>
-    <td th:text="${m.placa}"></td>
-    <td th:text="${m.modelo != null ? m.modelo.nome : ''}"></td>
-    <td>
-      <a th:href="@{/motos/edit/{id}(id=${m.id})}">Editar</a>
-      <a th:href="@{/motos/delete/{id}(id=${m.id})}">Deletar</a>
-    </td>
-  </tr>
-  </tbody>
-</table>
-
-<a th:href="@{/}">Voltar</a>
-
+    <table class="table table-dark table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Placa</th>
+            <th>Modelo</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="moto : ${motos}">
+            <td th:text="${moto.id}"></td>
+            <td th:text="${moto.placa}"></td>
+            <td th:text="${moto.modelo.nome}"></td>
+            <td>
+                <a th:href="@{/motos/editar/{id}(id=${moto.id})}" class="btn btn-neon btn-sm">Editar</a>
+                <a th:href="@{/motos/excluir/{id}(id=${moto.id})}" class="btn btn-danger btn-sm">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

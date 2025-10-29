@@ -1,55 +1,48 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>Cadastro de Movimentação</title>
-</head>
-<body>
-<h1 th:text="${movimentacao.id != null} ? 'Editar Movimentação' : 'Nova Movimentação'"></h1>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: bodyStart">
+<div class="container mt-4">
+    <h2>Cadastro de Movimentação</h2>
 
-<form th:action="@{/movimentacoes}" th:object="${movimentacao}" method="post">
-  <input type="hidden" th:field="*{id}" />
+    <form th:action="@{/movimentacoes}" th:object="${movimentacao}" method="post">
+        <input type="hidden" th:field="*{id}" />
 
-  <div>
-    <label>Moto:</label>
-    <select th:field="*{moto}" required>
-      <option value="" disabled selected>Selecione a moto</option>
-      <option th:each="m : ${motos}" th:value="${m}" th:text="${m.placa}"></option>
-    </select>
-  </div>
+        <div class="mb-3">
+            <label class="form-label">Data da Movimentação</label>
+            <input type="datetime-local" th:field="*{dataMovimentacao}" class="form-control bg-dark text-light border-success"/>
+        </div>
 
-  <div>
-    <label>Data:</label>
-    <input type="datetime-local" th:field="*{dataMovimentacao}" required />
-  </div>
+        <div class="mb-3">
+            <label class="form-label">Moto</label>
+            <select th:field="*{moto}" class="form-select bg-dark text-light border-success">
+                <option th:each="m : ${motos}" th:value="${m}" th:text="${m.placa}"></option>
+            </select>
+        </div>
 
-  <div>
-    <label>Setor:</label>
-    <select th:field="*{setor}" required>
-      <option value="" disabled selected>Selecione o setor</option>
-      <option th:each="s : ${setores}" th:value="${s}" th:text="${s.nome}"></option>
-    </select>
-  </div>
+        <div class="mb-3">
+            <label class="form-label">Setor</label>
+            <select th:field="*{setor}" class="form-select bg-dark text-light border-success">
+                <option th:each="s : ${setores}" th:value="${s}" th:text="${s.nome}"></option>
+            </select>
+        </div>
 
-  <div>
-    <label>Operador Origem:</label>
-    <select th:field="*{operadorOrigem}" required>
-      <option value="" disabled selected>Selecione o operador</option>
-      <option th:each="o : ${operadores}" th:value="${o}" th:text="${o.nome}"></option>
-    </select>
-  </div>
+        <div class="mb-3">
+            <label class="form-label">Operador Origem</label>
+            <select th:field="*{operadorOrigem}" class="form-select bg-dark text-light border-success">
+                <option th:each="o : ${operadores}" th:value="${o}" th:text="${o.nome}"></option>
+            </select>
+        </div>
 
-  <div>
-    <label>Operador Destino:</label>
-    <select th:field="*{operadorDestino}">
-      <option value="" disabled selected>Selecione o operador</option>
-      <option th:each="o : ${operadores}" th:value="${o}" th:text="${o.nome}"></option>
-    </select>
-  </div>
+        <div class="mb-3">
+            <label class="form-label">Operador Destino</label>
+            <select th:field="*{operadorDestino}" class="form-select bg-dark text-light border-success">
+                <option value="">Selecione (opcional)</option>
+                <option th:each="o : ${operadores}" th:value="${o}" th:text="${o.nome}"></option>
+            </select>
+        </div>
 
-  <button type="submit">Salvar</button>
-  <a th:href="@{/movimentacoes}">Voltar</a>
-</form>
-
-</body>
+        <button type="submit" class="btn btn-neon">Salvar</button>
+        <a th:href="@{/movimentacoes}" class="btn btn-secondary">Voltar</a>
+    </form>
+</div>
 </html>

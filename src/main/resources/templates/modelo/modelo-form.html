@@ -1,23 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Cadastro de Modelo</title>
-</head>
-<body>
-<h1 th:text="${modelo.id != null} ? 'Editar Modelo' : 'Novo Modelo'"></h1>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: bodyStart">
+<div class="container mt-4">
+    <h2 th:text="${#fields.hasErrors()} ? 'Corrija os erros' : 'Cadastro de Modelo'"></h2>
 
-<form th:action="@{/modelos}" th:object="${modelo}" method="post">
-    <input type="hidden" th:field="*{id}" />
+    <form th:action="@{/modelos}" th:object="${modelo}" method="post" class="mt-3">
+        <input type="hidden" th:field="*{id}" />
 
-    <div>
-        <label>Nome:</label>
-        <input type="text" th:field="*{nome}" placeholder="Digite o nome" required />
-    </div>
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome:</label>
+            <input type="text" id="nome" th:field="*{nome}" class="form-control bg-dark text-light border-success"/>
+        </div>
 
-    <button type="submit">Salvar</button>
-    <a th:href="@{/modelos}">Voltar</a>
-</form>
-
-</body>
+        <button type="submit" class="btn btn-neon">Salvar</button>
+        <a th:href="@{/modelos}" class="btn btn-secondary">Voltar</a>
+    </form>
+</div>
 </html>

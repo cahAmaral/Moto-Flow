@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: bodyStart">
+<div class="container mt-4">
+    <h2>Cadastro de Operador</h2>
+
+    <form th:action="@{/operadores}" th:object="${operador}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="mb-3">
+            <label class="form-label">Nome</label>
+            <input type="text" th:field="*{nome}" class="form-control bg-dark text-light border-success"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">CPF</label>
+            <input type="text" th:field="*{cpf}" class="form-control bg-dark text-light border-success"/>
+        </div>
+
+        <button type="submit" class="btn btn-neon">Salvar</button>
+        <a th:href="@{/operadores}" class="btn btn-secondary">Voltar</a>
+    </form>
+</div>
+</html>
+

@@ -2,8 +2,10 @@ package com.motoflow.motoflow.controller.view;
 
 import com.motoflow.motoflow.model.Operador;
 import com.motoflow.motoflow.service.OperadorService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -29,14 +31,18 @@ public class OperadorViewController {
     }
 
     @PostMapping
-    public String salvarOperador(@ModelAttribute Operador operador) {
+    public String salvarOperador(@Valid @ModelAttribute("operador") Operador operador, BindingResult result) {
+        if (result.hasErrors()) {
+            return "operador/operador-form";
+        }
         operadorService.save(operador);
         return "redirect:/operadores";
     }
 
     @GetMapping("/edit/{id}")
     public String editarOperador(@PathVariable Long id, Model model) {
-        model.addAttribute("operador", operadorService.findById(id));
+        model.addAttribute("operador", operadorService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Operador não encontrado")));
         return "operador/operador-form";
     }
 

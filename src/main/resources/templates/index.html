@@ -1,13 +1,78 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Página Inicial</title>
-</head>
+<head th:replace="fragments/layout :: head"></head>
 <body>
-<h1>Bem-vindo ao Motoflow!</h1>
-<a th:href="@{/motos}">Motos</a><br>
-<a th:href="@{/modelos}">Modelos</a><br>
-<a th:href="@{/movimentacoes}">Movimentações</a>
+<div class="d-flex">
+    <div th:replace="fragments/menu :: nav"></div>
+
+    <div class="main-content p-4 w-100">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="display-6">Painel de Entidades</h1>
+                <small class="text-muted">MOTOFLOW</small>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <a th:href="@{/motos}" class="card-link">
+                        <div class="card neon-card">
+                            <div class="card-body">
+                                <h5 class="card-title">🛵 Motos</h5>
+                                <p class="card-text">Gerenciar motos (listar e cadastrar).</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-4">
+                    <a th:href="@{/modelos}" class="card-link">
+                        <div class="card neon-card">
+                            <div class="card-body">
+                                <h5 class="card-title">🏷️ Modelos</h5>
+                                <p class="card-text">Gerenciar modelos de motos.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-4">
+                    <a th:href="@{/setores}" class="card-link">
+                        <div class="card neon-card">
+                            <div class="card-body">
+                                <h5 class="card-title">🏢 Setores</h5>
+                                <p class="card-text">Gerenciar setores.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-4">
+                    <a th:href="@{/operadores}" class="card-link">
+                        <div class="card neon-card">
+                            <div class="card-body">
+                                <h5 class="card-title">👷 Operadores</h5>
+                                <p class="card-text">Gerenciar operadores (CPF, nome).</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-4">
+                    <a th:href="@{/movimentacoes}" class="card-link">
+                        <div class="card neon-card">
+                            <div class="card-body">
+                                <h5 class="card-title">🔁 Movimentações</h5>
+                                <p class="card-text">Registrar movimentações entre setores.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div th:replace="fragments/footer :: footer"></div>
+    </div>
+</div>
 </body>
 </html>

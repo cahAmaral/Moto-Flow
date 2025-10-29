@@ -2,8 +2,10 @@ package com.motoflow.motoflow.controller.view;
 
 import com.motoflow.motoflow.model.Modelo;
 import com.motoflow.motoflow.service.ModeloService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -29,14 +31,19 @@ public class ModeloViewController {
     }
 
     @PostMapping
-    public String salvarModelo(@ModelAttribute Modelo modelo) {
+    public String salvarModelo(@Valid @ModelAttribute("modelo") Modelo modelo,
+                               BindingResult result, Model modelAttr) {
+        if (result.hasErrors()) {
+            return "modelo/modelo-form";
+        }
         modeloService.save(modelo);
         return "redirect:/modelos";
     }
 
     @GetMapping("/edit/{id}")
     public String editarModelo(@PathVariable Long id, Model model) {
-        model.addAttribute("modelo", modeloService.findById(id));
+        model.addAttribute("modelo", modeloService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Modelo não encontrado")));
         return "modelo/modelo-form";
     }
 

@@ -2,8 +2,10 @@ package com.motoflow.motoflow.controller.view;
 
 import com.motoflow.motoflow.model.Setor;
 import com.motoflow.motoflow.service.SetorService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -29,14 +31,18 @@ public class SetorViewController {
     }
 
     @PostMapping
-    public String salvarSetor(@ModelAttribute Setor setor) {
+    public String salvarSetor(@Valid @ModelAttribute("setor") Setor setor, BindingResult result) {
+        if (result.hasErrors()) {
+            return "setor/setor-form";
+        }
         setorService.save(setor);
         return "redirect:/setores";
     }
 
     @GetMapping("/edit/{id}")
     public String editarSetor(@PathVariable Long id, Model model) {
-        model.addAttribute("setor", setorService.findById(id));
+        model.addAttribute("setor", setorService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Setor não encontrado")));
         return "setor/setor-form";
     }
 

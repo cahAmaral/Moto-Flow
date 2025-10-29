@@ -1,6 +1,8 @@
 package com.motoflow.motoflow.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
@@ -8,10 +10,13 @@ import java.io.Serializable;
 public class Modelo implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Gera ID automaticamente
     @Column(name = "id_modelo")
     private Long id;
 
-    @Column(name = "nm_modelo", nullable = false)
+    @NotBlank(message = "O nome do modelo é obrigatório.")
+    @Size(max = 100, message = "O nome do modelo deve ter no máximo 100 caracteres.")
+    @Column(name = "nm_modelo", nullable = false, length = 100)
     private String nome;
 
     // Getters e Setters
