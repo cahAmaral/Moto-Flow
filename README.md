@@ -1,90 +1,112 @@
-MotoFlow
-Descrição
+# 🏍️ MotoFlow
 
-O MotoFlow é um sistema desenvolvido em Java com Spring Boot para gerenciamento de motos, modelos e movimentações. A aplicação permite realizar operações de CRUD (Create, Read, Update, Delete) em entidades como Moto, Modelo e Movimentação, fornecendo uma API REST para integração com front-end ou ferramentas externas.
+Sistema web para gerenciamento de motos, modelos, operadores, movimentações e setores, desenvolvido em **Java 17** com **Spring Boot 3**, **Spring Security**, **JPA/Hibernate** e **Oracle Database**.  
+Inclui autenticação com controle de acesso por papéis (**USER** e **ADMIN**) e documentação interativa via **Swagger UI**.
 
-Funcionalidades
+---
 
-Listar motos, modelos e movimentações.
+## 🚀 Tecnologias Utilizadas
 
-Criar, editar e deletar motos, modelos e movimentações.
+- **Java 21**
+- **Spring Boot 3.5.6**
+- **Spring Web**
+- **Spring Data JPA**
+- **Spring Security**
+- **Thymeleaf**
+- **Oracle Database**
+- **Lombok**
+- **Swagger / SpringDoc OpenAPI**
 
-Suporte a operações via API REST.
+---
 
-Integração com banco de dados Oracle.
+## ⚙️ Configuração do Projeto
 
-Log de queries geradas pelo Hibernate.
+### 1️⃣ Clone o repositório
+```bash
+git clone https://github.com/cahAmaral/MotoFlow.git
+cd MotoFlow
+```
 
-Tecnologias utilizadas
+### 2️⃣ Configure o banco de dados Oracle
+No arquivo `application.properties` ou `application.yml`, ajuste as credenciais:
+```properties
+spring.datasource.url=jdbc:oracle:thin:@//localhost:1521/XE
+spring.datasource.username=system
+spring.datasource.password=admin
+spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
 
-Java 21
-
-Spring Boot 3.5.6
-
-Spring Data JPA
-
-Hibernate ORM
-
-Thymeleaf (views, parcialmente implementado)
-
-Banco de dados Oracle
-
-Maven (gerenciamento de dependências)
-
-Endpoints da API
-Moto
-Método	Endpoint	Descrição
-GET	/motos	Lista todas as motos
-POST	/motos	Cria uma nova moto
-GET	/motos/{id}	Busca moto por ID
-PUT	/motos/{id}	Atualiza moto existente
-DELETE	/motos/{id}	Remove moto por ID
-Modelo
-Método	Endpoint	Descrição
-GET	/modelos	Lista todos os modelos
-POST	/modelos	Cria um novo modelo
-GET	/modelos/{id}	Busca modelo por ID
-PUT	/modelos/{id}	Atualiza modelo existente
-DELETE	/modelos/{id}	Remove modelo por ID
-Movimentação
-Método	Endpoint	Descrição
-GET	/movimentacoes	Lista todas as movimentações
-POST	/movimentacoes	Cria uma nova movimentação
-GET	/movimentacoes/{id}	Busca movimentação por ID
-PUT	/movimentacoes/{id}	Atualiza movimentação existente
-DELETE	/movimentacoes/{id}	Remove movimentação por ID
-Rodando o projeto
-Pré-requisitos
-
-Java 21
-
-Maven
-
-Banco de dados Oracle
-
-IDE (IntelliJ IDEA, Eclipse ou VSCode)
-
-Passos
-
-Clone o repositório:
-
-git clone https://github.com/cahAmaral/Moto-Flow.git
-
-
-Configure o application.properties com as credenciais do banco Oracle:
-
-spring.datasource.url=jdbc:oracle.fiap.com.br/1521:orcl
-spring.datasource.username=rm558012
-spring.datasource.password=200106
 spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.OracleDialect
+```
 
+---
 
-Rode o projeto:
+## 🔐 Autenticação e Usuários
 
+O sistema utiliza **Spring Security** com autenticação **HTTP Basic** e criptografia de senhas com **BCrypt**.
+
+Ao iniciar a aplicação, um usuário padrão é criado automaticamente:
+
+| Usuário | Senha   | Papel        |
+|----------|----------|--------------|
+| admin    | 123456   | ROLE_ADMIN   |
+
+Esse usuário possui acesso total ao sistema.
+
+---
+
+## 📚 Endpoints Principais (Swagger)
+
+Após rodar o projeto, acesse:
+
+👉 [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+
+### Endpoints disponíveis:
+- `/api/usuarios` → CRUD de usuários
+- `/api/motos` → CRUD de motos
+- `/api/modelos` → CRUD de modelos
+- `/api/setores` → CRUD de setores
+- `/api/operadores` → CRUD de operadores
+- `/api/movimentacoes` → CRUD de movimentações
+
+---
+
+## 🧩 Estrutura de Pacotes
+
+```
+com.motoflow.motoflow
+├── config           → Configurações de segurança e beans
+├── controller       → Controladores REST e Views
+│   ├── api          → Endpoints JSON
+│   └── view         → Páginas Thymeleaf
+├── model            → Entidades JPA
+├── repository       → Interfaces JPA
+├── service          → Regras de negócio
+└── MotoFlowApplication.java → Classe principal
+```
+
+---
+
+## 🧠 Funcionalidades
+
+- Login e autenticação com **Spring Security**
+- Controle de acesso por **roles (USER/ADMIN)**
+- CRUD completo para todas as entidades
+- Interface web com **Thymeleaf**
+- Documentação interativa com **Swagger UI**
+- Senhas criptografadas com **BCrypt**
+- Integração total com banco **Oracle**
+
+---
+
+## 🖥️ Execução
+
+Para rodar o projeto localmente:
+
+```bash
 mvn spring-boot:run
-
-
-Teste os endpoints via Postman ou qualquer cliente REST.
+---
 
 Integrantes
 RM
